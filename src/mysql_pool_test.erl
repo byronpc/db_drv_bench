@@ -1,4 +1,4 @@
--module(mysql_test).
+-module(mysql_pool_test).
 
  % CREATE TABLE IF NOT EXISTS `users`
  %     (`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
