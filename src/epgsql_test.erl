@@ -5,8 +5,8 @@
 -define(QUERY, <<"SELECT id FROM users WHERE id = $1">>).
 
 -export([
-    bench/2,
-    bench/3
+  bench/2,
+  bench/3
 ]).
 
 bench(Number, Concurrency) ->
