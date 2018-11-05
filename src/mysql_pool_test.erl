@@ -15,12 +15,7 @@ bench(Number, Concurrency) ->
   bench(Number, Concurrency, pool, false).
 
 bench(Number, Concurrency, Mode, Profile) ->
-  case mysql_pool:start() of
-    ok ->
-      mysql_pool:prepare(mypool, get_accounts, ?QUERY);
-    _ ->
-      ok
-  end,
+  ok = mysql_pool:prepare(mypool, get_accounts, ?QUERY),
 
   ConnFun = fun(_) -> ok end,
 
