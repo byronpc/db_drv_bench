@@ -18,11 +18,12 @@ bench(Number, Concurrency, Profile) ->
 
   ConnFun = fun(_) ->
     {ok, Pid} = epgsql:connect(ConnectionOptions),
+    {ok, _} = epgsql:parse(Pid, <<"get_accounts">>, ?QUERY, []),
     Pid
   end,
 
   OpFun = fun(ConnectionPid) ->
-    {ok,_,_} = epgsql:equery(ConnectionPid, ?QUERY, [1])
+    {ok,_,_} = epgsql:prepared_query(ConnectionPid, <<"get_accounts">>, [1])
   end,
 
   bench:bench(Number, Concurrency, Profile, ConnFun, OpFun).
