@@ -1,4 +1,4 @@
--module(epgsql_test).
+-module(pgapp_test).
 
 % CREATE TABLE users(id serial PRIMARY KEY, name VARCHAR(100));
 
@@ -16,13 +16,10 @@ bench(Number, Concurrency, Profile) ->
 
   ConnectionOptions = application:get_all_env(epgsql),
 
-  ConnFun = fun(_) ->
-    {ok, Pid} = epgsql:connect(ConnectionOptions),
-    Pid
-  end,
+  ConnFun = fun(_) -> ok end,
 
-  OpFun = fun(ConnectionPid) ->
-    {ok,_,_} = epgsql:equery(ConnectionPid, ?QUERY, [1])
+  OpFun = fun(_) ->
+    pgapp:equery(pgpool, ?QUERY, [1])
   end,
 
   bench:bench(Number, Concurrency, Profile, ConnFun, OpFun).
